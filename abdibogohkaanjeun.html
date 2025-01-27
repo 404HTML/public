@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdi Bogoh Ka Anjeun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>/* Global Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Great Vibes', 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b); /* Warna gelap dengan gradasi */
+  color: #ffffff;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Header Styling */
+h2 {
+  position: absolute;
+  top: 5%;
+  text-align: center;
+  font-size: 3rem; /* Ukuran lebih besar untuk keterbacaan */
+  color: #38bdf8; /* Biru lembut untuk kontras */
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6), 0 0 15px rgba(56, 189, 248, 0.8);
+  animation: fadeIn 2s ease-in-out;
+  line-height: 1.4;
+  z-index: 10;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slider Container */
+.slider {
+  width: 100%;
+  max-width: 800px;
+  height: 70vh; /* Tinggi lebih besar agar konten lebih lega */
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(31, 41, 55, 0.8); /* Background transparan gelap */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  position: relative;
+  padding: 10px;
+}
+
+/* Slides Container */
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Individual Slide */
+.slide {
+  flex: 0 0 100%;
+  height: 100%;
+  padding: 40px; /* Padding lebih besar untuk kenyamanan membaca */
+  color: #e2e8f0; /* Warna abu-abu terang */
+  font-size: 1.6rem; /* Ukuran teks lebih besar */
+  line-height: 1.8; /* Jarak antar baris nyaman */
+  overflow-y: auto; /* Enable vertical scrolling */
+  text-align: center; /* Teks rata tengah */
+}
+
+.slide p {
+  word-wrap: break-word;
+  margin-bottom: 20px;
+}
+
+/* Scrollbar Styling */
+.slide::-webkit-scrollbar {
+  width: 8px;
+}
+
+.slide::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+}
+
+.slide::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+/* Indicator Styling */
+.indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 3%; /* Jarak lebih kecil dari bawah */
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 12px; /* Jarak antar dot lebih besar */
+  z-index: 10;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #38bdf8;
+  transform: scale(1.3);
+}
+
+.dot:hover {
+  background: #38bdf8;
+  transform: scale(1.2);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2.5rem; /* Header tetap terlihat besar */
+    top: 5%;
+  }
+
+  .slider {
+    height: 75vh; /* Sedikit lebih tinggi di layar kecil */
+  }
+
+  .slide {
+    font-size: 1.4rem; /* Teks tetap besar di layar sedang */
+    padding: 30px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 2rem; /* Header cukup besar di layar kecil */
+  }
+
+  .slider {
+    height: 80vh;
+  }
+
+  .slide {
+    font-size: 1.2rem; /* Ukuran teks lebih kecil untuk layar kecil */
+  }
+}
+</style>
+</head>
+<body>
+  <h2>Abdi Bogoh Ka Anjeun<br>===></h2>
+
+  <div class="slider" id="slider">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <p>
+          Wilujeng enjing, euy! Aing teh ti tadi ngarep-ngarep wa ti maneh. Tiap ucapan ti maneh teh kawas pulsa gratis, nyenangkeun pisan...
+        </p>
+      </div>
+      <div class="slide">
+        <p>
+          Wilujeng enjing, euy! Aing teh ti tadi ngarep-ngarep wa ti maneh. Tiap ucapan ti maneh teh kawas pulsa gratis, nyenangkeun pisan...
+        </p>
+      </div>
+      <!-- Add more slides as needed -->
+    </div>
+    <div class="indicator" id="indicator"></div>
+  </div>
+
+  <script>// Initialize Variables
+const slides = document.getElementById('slides');
+const slideElements = document.querySelectorAll('.slide');
+const totalSlides = slideElements.length;
+const indicator = document.getElementById('indicator');
+let currentSlide = 0;
+let isSwiping = false;
+
+// Generate Indicator Dots
+const createIndicatorDots = () => {
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    if (i === 0) dot.classList.add('active'); // Set first dot as active
+    dot.dataset.index = i;
+    indicator.appendChild(dot);
+  }
+};
+createIndicatorDots();
+
+const dots = document.querySelectorAll('.dot');
+
+// Update Slider and Indicator
+const updateSlider = () => {
+  slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[currentSlide].classList.add('active');
+};
+
+// Handle Dot Click
+dots.forEach(dot => {
+  dot.addEventListener('click', (e) => {
+    const index = Number(e.target.dataset.index);
+    if (index !== currentSlide) {
+      currentSlide = index;
+      updateSlider();
+    }
+  });
+});
+
+// Swipe Navigation
+let startX = 0;
+let endX = 0;
+
+// Start Touch
+slides.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+  isSwiping = true;
+});
+
+// End Touch
+slides.addEventListener('touchend', (e) => {
+  if (!isSwiping) return;
+  endX = e.changedTouches[0].clientX;
+
+  const swipeDistance = startX - endX;
+
+  // Threshold for swipe gesture
+  if (swipeDistance > 50 && currentSlide < totalSlides - 1) {
+    currentSlide++;
+  } else if (swipeDistance < -50 && currentSlide > 0) {
+    currentSlide--;
+  }
+
+  updateSlider();
+  isSwiping = false;
+});
+
+// Keyboard Navigation (Optional for better UX)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+    currentSlide++;
+    updateSlider();
+  } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+    currentSlide--;
+    updateSlider();
+  }
+});
+
+// Auto-Play Functionality (Optional)
+const autoPlaySlider = (interval = 10000) => {
+  setInterval(() => {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+    } else {
+      currentSlide = 0; // Reset to the first slide
+    }
+    updateSlider();
+  }, interval);
+};
+
+// Uncomment the line below to enable auto-play
+ autoPlaySlider();
+</script>
+</body>
+</html>
