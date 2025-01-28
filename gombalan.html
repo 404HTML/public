@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gombalan</title>
+  <style>
+    body {
+      font-family: 'Serif', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #121212;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border: 2px dotted #fff;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+      width: 80%;
+      max-width: 360px;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 1.6em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    }
+
+    #quote-container {
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px dashed #fff;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    button {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    #page-indicator {
+      font-size: 1em;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✨ Gombalan ✨</h1>
+    <div id="quote-container"></div>
+    <div class="pagination">
+      <button id="prev-btn" onclick="changePage(-1)" disabled>❮</button>
+      <span id="page-indicator">1 / 25</span>
+      <button id="next-btn" onclick="changePage(1)">❯</button>
+    </div>
+  </div>
+
+  <script>
+    const quotes = [
+      "Kalau kamu bintang, aku malamnya. Karena malamku nggak akan indah tanpa bintang sepertimu.",
+      "Cinta itu buta, tapi aku nggak butuh mata buat lihat kamu adalah segalanya.",
+      "Aku nggak butuh kompas, karena arah hatiku selalu menuju ke kamu.",
+      "Kalau aku jadi matahari, aku nggak mau tenggelam. Aku ingin terus melihat senyummu.",
+      "Aku nggak pinter matematika, tapi aku tahu kamu + aku = selamanya.",
+      "Kamu tahu nggak? Kalau senyuman kamu tuh kayak charger buat hati aku yang lowbat.",
+      "Kalau pelangi itu indah karena warnanya, aku indah karena ada kamu di hidupku.",
+      "Kamu itu ibarat kopi di pagi hari, selalu bikin hariku lebih hidup.",
+      "Kalau aku jadi burung, aku nggak akan terbang ke langit. Aku cuma mau terbang ke hati kamu.",
+      "Cintaku ke kamu tuh kayak angka 8. Nggak ada ujungnya.",
+      "Aku rela jadi hujan, supaya aku bisa menyentuhmu tanpa kamu merasa terganggu.",
+      "Cintaku padamu ibarat akar pohon, walau nggak kelihatan, tapi selalu ada dan kuat.",
+      "Aku nggak tahu cara jadi sempurna, tapi aku tahu caranya mencintaimu dengan sepenuh hati.",
+      "Kamu ibarat oksigen, tanpa kamu, aku nggak bisa bernapas.",
+      "Aku nggak butuh bunga buat hari Valentine, aku cuma butuh kamu selamanya.",
+      "Kamu tahu nggak? Jantungku selalu main drum setiap kali lihat kamu.",
+      "Kalau hidup itu permainan, kamu adalah level tertinggi yang aku perjuangkan.",
+      "Aku nggak suka puisi, tapi setiap lihat kamu, kata-kata indah langsung mengalir di kepalaku.",
+      "Kalau senyummu itu dosa, aku rela masuk neraka karena melihatmu terus.",
+      "Cintaku padamu itu seperti wifi, nggak kelihatan tapi selalu terasa sinyalnya.",
+      "Kamu adalah alasan kenapa aku lebih suka malam, karena aku bisa bermimpi tentang kamu.",
+      "Aku nggak bisa memprediksi masa depan, tapi aku tahu satu hal, kamu adalah masa depanku.",
+      "Kalau mencintaimu itu penyakit, aku nggak mau sembuh.",
+      "Bersama kamu, aku nggak butuh kata 'selesai', karena aku ingin ini berlangsung selamanya.",
+      "Kamu tahu nggak? Kamu itu ibarat kutub utara, selalu menarik hatiku ke arahmu."
+    ];
+
+    let currentPage = 0;
+    let isClickDisabled = false;
+
+    function displayQuotes() {
+      const container = document.getElementById('quote-container');
+      const quoteText = quotes[currentPage];
+
+      if (!quoteText) {
+        console.error("Quote tidak ditemukan!");
+        return;
+      }
+
+      container.style.opacity = 0;
+
+      setTimeout(() => {
+        container.innerHTML = `<p>${quoteText}</p>`;
+        container.style.animation = 'none';
+        container.offsetHeight;
+        container.style.animation = 'fadeIn 0.5s forwards';
+
+        document.getElementById('page-indicator').innerText = `${currentPage + 1} / ${quotes.length}`;
+        document.getElementById('prev-btn').disabled = currentPage === 0;
+        document.getElementById('next-btn').disabled = currentPage === quotes.length - 1;
+
+        isClickDisabled = false;
+      }, 500);
+    }
+
+    function changePage(direction) {
+      if (isClickDisabled) return;
+      isClickDisabled = true;
+
+      currentPage += direction;
+      if (currentPage < 0) currentPage = 0;
+      if (currentPage >= quotes.length) currentPage = quotes.length - 1;
+
+      displayQuotes();
+    }
+
+    displayQuotes();
+  </script>
+</body>
+</html>
