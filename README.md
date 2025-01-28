@@ -3,3 +3,4 @@
 ## **Daftar Tautan**
 
 1. [**Abdi Bogoh Ka Anjeun**](https://404html.github.io/for/abdibogohkaanjeun.html)
+2. [**Gombalan**](https://404html.github.io/for/gombalan.html)
