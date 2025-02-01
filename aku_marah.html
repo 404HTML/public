@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Aku Marah</title>
-<meta name="description" content="By: 404HTML" />
-<meta property="og:title" content="Aku Marah" />
-<meta property="og:description" content="By: 404HTML" />
-<meta property="og:image" content="https://raw.githubusercontent.com/404HTML/for/main/aku_marah_6.webp" />
-<meta property="og:url" content="https://github.com/404html" />
-<meta property="og:type" content="website" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aku Marah</title>
+  <meta name="description" content="By: 404HTML">
+  <meta property="og:title" content="Aku Marah">
+  <meta property="og:description" content="By: 404HTML">
+  <meta property="og:image" content="https://raw.githubusercontent.com/404HTML/for/main/aku_marah_6.webp">
+  <meta property="og:url" content="https://github.com/404html">
+  <meta property="og:type" content="website">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -59,15 +59,60 @@
     .show {
       opacity: 1 !important;
     }
+
+    /* Loading screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      font-size: 24px;
+      z-index: 9999;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #loading-progress {
+      width: 80%;
+      max-width: 400px;
+      height: 10px;
+      background: #444;
+      margin-top: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #00ff00;
+      transition: width 0.3s ease-in-out;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <p>Memuat... <span id="loading-text">0%</span></p>
+    <div id="loading-progress">
+      <div id="progress-bar"></div>
+    </div>
+  </div>
+
   <h2>AKU MARAH</h2>
 
   <div id="audio-container" controlsList="nodownload">
-    <audio id="audio" controls>
+    <audio id="audio" controls disabled>
       <source src="https://github.com/404HTML/for/raw/refs/heads/main/aku_marah.mp3" type="audio/mpeg">
+      Browser Anda tidak mendukung audio.
     </audio>
   </div>
 
@@ -77,73 +122,71 @@
   </div>
 
   <script>
-    // Data subtitle dalam JSON
-    const subtitles = [{
-      start: 1,
-      end: 4,
-      text: "sayang kamu di mana nih",
-      img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_1.webp"
-    },
-      {
-        start: 4,
-        end: 6,
-        text: "kamu udah makan belum",
-        img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_2.webp"
-      },
-      {
-        start: 7,
-        end: 9,
-        text: "aku cape nungguin loh",
-        img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_3.webp"
-      },
-      {
-        start: 10,
-        end: 12,
-        text: "kamu sibuk terus",
-        img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_4.webp"
-      },
-      {
-        start: 12,
-        end: 15,
-        text: "kamu inget sama aku",
-        img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_5.webp"
-      },
-      {
-        start: 17,
-        end: 19,
-        text: "aku marah loh",
-        img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_6.webp"
-      }
+    document.addEventListener("DOMContentLoaded", function () {
+      const audio = document.getElementById("audio");
+      const subtitleContainer = document.getElementById("subtitle-container");
+      const subtitleText = document.getElementById("subtitle-text");
+      const subtitleImg = document.getElementById("subtitle-img");
+      const loadingScreen = document.getElementById("loading-screen");
+      const loadingText = document.getElementById("loading-text");
+      const progressBar = document.getElementById("progress-bar");
+
+      const subtitles = [
+        { start: 1, end: 4, text: "sayang kamu di mana nih", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_1.webp" },
+        { start: 4, end: 6, text: "kamu udah makan belum", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_2.webp" },
+        { start: 7, end: 9, text: "aku cape nungguin loh", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_3.webp" },
+        { start: 10, end: 12, text: "kamu sibuk terus", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_4.webp" },
+        { start: 12, end: 15, text: "kamu inget sama aku", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_5.webp" },
+        { start: 17, end: 19, text: "aku marah loh", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_6.webp" }
       ];
 
-    const audio = document.getElementById("audio");
-    const subtitleContainer = document.getElementById("subtitle-container");
-    const subtitleText = document.getElementById("subtitle-text");
-    const subtitleImg = document.getElementById("subtitle-img");
+      let loaded = 0;
+      const totalFiles = subtitles.length + 1;
 
-    // Event listener untuk memperbarui subtitle
-    audio.addEventListener("timeupdate", function () {
-      let currentTime = audio.currentTime;
-      let currentSubtitle = subtitles.find(sub => currentTime >= sub.start && currentTime <= sub.end);
+      const updateProgress = () => {
+        loaded++;
+        let percent = Math.floor((loaded / totalFiles) * 100);
+        loadingText.textContent = percent + "%";
+        progressBar.style.width = percent + "%";
 
-      if (currentSubtitle) {
-        subtitleText.textContent = currentSubtitle.text;
-        subtitleContainer.classList.add("show");
-        subtitleText.classList.add("show");
+        if (loaded === totalFiles) {
+          setTimeout(() => {
+            loadingScreen.style.opacity = "0";
+            setTimeout(() => loadingScreen.style.display = "none", 500);
+            audio.removeAttribute("disabled");
+          }, 500);
+        }
+      };
 
-        if (currentSubtitle.img) {
+      // Preload images
+      subtitles.forEach(sub => {
+        let img = new Image();
+        img.src = sub.img;
+        img.onload = updateProgress;
+        img.onerror = updateProgress;
+      });
+
+      // Preload audio
+      audio.addEventListener("canplaythrough", updateProgress);
+      audio.addEventListener("error", updateProgress);
+
+      audio.addEventListener("timeupdate", function () {
+        let currentTime = audio.currentTime;
+        let currentSubtitle = subtitles.find(sub => currentTime >= sub.start && currentTime <= sub.end);
+
+        if (currentSubtitle) {
+          subtitleText.textContent = currentSubtitle.text;
+          subtitleContainer.classList.add("show");
+          subtitleText.classList.add("show");
           subtitleImg.src = currentSubtitle.img;
           subtitleImg.style.display = "block";
           setTimeout(() => subtitleImg.classList.add("show"), 50);
         } else {
+          subtitleContainer.classList.remove("show");
+          subtitleText.classList.remove("show");
           subtitleImg.classList.remove("show");
-          setTimeout(() => subtitleImg.style.display = "none", 500);
         }
-      } else {
-        subtitleContainer.classList.remove("show");
-        subtitleText.classList.remove("show");
-        subtitleImg.classList.remove("show");
-      }
+      });
     });
   </script>
 
