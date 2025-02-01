@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio dengan Subtitle & Gambar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #audio-container {
+      margin-top: 20px;
+    }
+
+    #subtitle-container {
+      position: relative;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #subtitle-text {
+      font-size: 20px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #subtitle-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      background-color: #fff;
+    }
+
+    .show {
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>AKU MARAH</h2>
+
+  <div id="audio-container" controlsList="nodownload">
+    <audio id="audio" controls>
+      <source src="kamu.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div id="subtitle-container">
+    <div id="subtitle-text"></div>
+    <img id="subtitle-img" src="" alt="Subtitle Image">
+  </div>
+
+  <script>
+    // Data subtitle dalam JSON
+    const subtitles = [{
+      start: 1,
+      end: 4,
+      text: "sayang kamu di mana nih",
+      img: "../aku_marah_1.webp"
+    },
+      {
+        start: 4,
+        end: 6,
+        text: "kamu udah makan belum",
+        img: "../aku_marah_2.webp"
+      },
+      {
+        start: 7,
+        end: 9,
+        text: "aku cape nungguin loh",
+        img: "../aku_marah_3.webp"
+      },
+      {
+        start: 10,
+        end: 12,
+        text: "kamu sibuk terus",
+        img: "../aku_marah_4.webp"
+      },
+      {
+        start: 12,
+        end: 15,
+        text: "kamu inget sama aku",
+        img: "../aku_marah_5.webp"
+      },
+      {
+        start: 17,
+        end: 19,
+        text: "aku marah loh",
+        img: "../aku_marah_6.webp"
+      }
+      ];
+
+    const audio = document.getElementById("audio");
+    const subtitleContainer = document.getElementById("subtitle-container");
+    const subtitleText = document.getElementById("subtitle-text");
+    const subtitleImg = document.getElementById("subtitle-img");
+
+    // Event listener untuk memperbarui subtitle
+    audio.addEventListener("timeupdate", function () {
+      let currentTime = audio.currentTime;
+      let currentSubtitle = subtitles.find(sub => currentTime >= sub.start && currentTime <= sub.end);
+
+      if (currentSubtitle) {
+        subtitleText.textContent = currentSubtitle.text;
+        subtitleContainer.classList.add("show");
+        subtitleText.classList.add("show");
+
+        if (currentSubtitle.img) {
+          subtitleImg.src = currentSubtitle.img;
+          subtitleImg.style.display = "block";
+          setTimeout(() => subtitleImg.classList.add("show"), 50);
+        } else {
+          subtitleImg.classList.remove("show");
+          setTimeout(() => subtitleImg.style.display = "none", 500);
+        }
+      } else {
+        subtitleContainer.classList.remove("show");
+        subtitleText.classList.remove("show");
+        subtitleImg.classList.remove("show");
+      }
+    });
+  </script>
+
+</body>
+</html>
