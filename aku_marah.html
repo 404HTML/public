@@ -101,7 +101,9 @@
 
   <!-- Loading Screen -->
   <div id="loading-screen">
-    <p>Memuat... <span id="loading-text">0%</span></p>
+    <p>
+      Memuat... <span id="loading-text">0%</span>
+    </p>
     <div id="loading-progress">
       <div id="progress-bar"></div>
     </div>
@@ -109,10 +111,9 @@
 
   <h2>AKU MARAH</h2>
 
-  <div id="audio-container" controlsList="nodownload">
-    <audio id="audio" controls disabled>
+  <div id="audio-container">
+    <audio id="audio" controls disabled controlsList="nodownload">
       <source src="https://github.com/404HTML/for/raw/refs/heads/main/aku_marah.mp3" type="audio/mpeg">
-      Browser Anda tidak mendukung audio.
     </audio>
   </div>
 
@@ -131,14 +132,24 @@
       const loadingText = document.getElementById("loading-text");
       const progressBar = document.getElementById("progress-bar");
 
-      const subtitles = [
-        { start: 1, end: 4, text: "sayang kamu di mana nih", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_1.webp" },
-        { start: 4, end: 6, text: "kamu udah makan belum", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_2.webp" },
-        { start: 7, end: 9, text: "aku cape nungguin loh", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_3.webp" },
-        { start: 10, end: 12, text: "kamu sibuk terus", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_4.webp" },
-        { start: 12, end: 15, text: "kamu inget sama aku", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_5.webp" },
-        { start: 17, end: 19, text: "aku marah loh", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_6.webp" }
-      ];
+      const subtitles = [{
+        start: 1, end: 4, text: "sayang kamu di mana nih", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_1.webp"
+      },
+        {
+          start: 4, end: 6, text: "kamu udah makan belum", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_2.webp"
+        },
+        {
+          start: 7, end: 9, text: "aku cape nungguin loh", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_3.webp"
+        },
+        {
+          start: 10, end: 12, text: "kamu sibuk terus", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_4.webp"
+        },
+        {
+          start: 12, end: 15, text: "kamu inget sama aku", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_5.webp"
+        },
+        {
+          start: 17, end: 19, text: "aku marah loh", img: "https://github.com/404HTML/for/raw/refs/heads/main/aku_marah_6.webp"
+        }];
 
       let loaded = 0;
       const totalFiles = subtitles.length + 1;
@@ -173,14 +184,17 @@
       audio.addEventListener("timeupdate", function () {
         let currentTime = audio.currentTime;
         let currentSubtitle = subtitles.find(sub => currentTime >= sub.start && currentTime <= sub.end);
-
         if (currentSubtitle) {
-          subtitleText.textContent = currentSubtitle.text;
-          subtitleContainer.classList.add("show");
-          subtitleText.classList.add("show");
-          subtitleImg.src = currentSubtitle.img;
-          subtitleImg.style.display = "block";
-          setTimeout(() => subtitleImg.classList.add("show"), 50);
+          if (subtitleImg.src !== currentSubtitle.img) {
+            setTimeout(() => {
+              subtitleText.textContent = currentSubtitle.text;
+              subtitleContainer.classList.add("show");
+              subtitleText.classList.add("show");
+              subtitleImg.src = currentSubtitle.img;
+              subtitleImg.style.display = "block";
+              subtitleImg.classList.add("show");
+            }, 49);
+          }
         } else {
           subtitleContainer.classList.remove("show");
           subtitleText.classList.remove("show");
