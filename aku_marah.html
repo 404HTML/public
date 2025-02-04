@@ -95,6 +95,18 @@
       background: #00ff00;
       transition: width 0.3s ease-in-out;
     }
+
+    img {
+      pointer-events: none;
+      user-drag: none;
+      -webkit-user-drag: none;
+    }
+    p,span,h2,div  {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+   }
   </style>
 </head>
 <body>
@@ -202,6 +214,16 @@
         }
       });
     });
+
+    document.addEventListener("contextmenu", function(event) {
+    event.preventDefault(); 
+  });
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "F12" || 
+        (event.ctrlKey && event.shiftKey && event.key === "I")) {
+      event.preventDefault();
+    }
+  });
   </script>
 
 </body>
