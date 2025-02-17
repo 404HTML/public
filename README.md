@@ -1,6 +1,6 @@
-![WILDAN HIDAYAT](https://raw.githubusercontent.com/404HTML/for/refs/heads/main/404HTML.webp)
+<img src="https://raw.githubusercontent.com/404HTML/for/refs/heads/main/404HTML.webp" width="100%"/>
 
-> makasih ya telah mampir kesini jangan lupakan kasih saran dan pendapat ya di IG 
+<p>makasih ya telah mampir kesini jangan lupakan kasih saran dan pendapat ya di IG</p>
 
 |**No**|**HIBURAN**|
 |-|-|
