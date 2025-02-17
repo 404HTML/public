@@ -1,40 +1,29 @@
-![Logo](https://raw.githubusercontent.com/404HTML/for/refs/heads/main/404HTML.webp)
-
----
-
-## **BY: WILDAN HIDAYAT**
+![WILDAN HIDAYAT](https://raw.githubusercontent.com/404HTML/for/refs/heads/main/404HTML.webp)
 
 > makasih ya telah mampir kesini jangan lupakan kasih saran dan pendapat ya di IG 
 
-**HIBURAN 😂**
-
-1. [**Abdi Bogoh Ka Anjeun**](https://404html.github.io/for/abdibogohkaanjeun.html)
-2. [**Gombalan**](https://404html.github.io/for/gombalan.html)
-3. [**Nama**](link)
-4. [**Nama**](link)
-5. [**Nama**](link)
-
-**ILMU 🤓**
-
-1. [**Nama**](link)
-2. [**Nama**](link)
-3. [**Nama**](link)
-4. [**Nama**](link)
-5. [**Nama**](link)
-
-**PRODUK SHOPEE 📉**
-
-1. [**Nama**](link)
-2. [**Nama**](link)
-3. [**Nama**](link)
-4. [**Nama**](link)
-5. [**Nama**](link)
-
-**MEDIA SOSIAL 📡**
-
-[**YouTube**](link)
-[**Facebook**](link)
-[**Instagram**](link)
-[**Threads**](link)
-
----
+|**No**|**HIBURAN**|
+|-|-|
+|01|[Nama](link)
+|02|[Nama](link)
+|03|[Nama](link)
+|04|[Nama](link)
+|05|[Nama](link)
+|**No**|**ILMU**|
+|01|[Nama](link)
+|02|[Nama](link)
+|03|[Nama](link)
+|04|[Nama](link)
+|05|[Nama](link)
+|**No**|**PRODUK_SHOPEE**|
+|01|[Nama](link)
+|02|[Nama](link)
+|03|[Nama](link)
+|04|[Nama](link)
+|05|[Nama](link)
+|**No**|**MEDIA_SOSIAL**|
+|01|[Nama](link)
+|02|[Nama](link)
+|03|[Nama](link)
+|04|[Nama](link)
+|05|[Nama](link)
